@@ -13,26 +13,26 @@ import javax.swing.JOptionPane;
 
 public class Arquivos {
 
-	public static void main(String[] args) {
-
-		String diretorio = selecionarDiretorio("Selecionar pasta", "Escolha uma pasta", true);
-
-		try {
-			// lista arquivos gerais
-			// listarArquivosOuPastas();
-
-			// lista arquivos de acordo com a extensao passada
-			// listaArquivosFiltradosPelaExtensao(diretorio,".pdf");
-
-			// lista arquivo de acordo com o trexo do nome descrito e a extensao
-			listaArquivosFiltradosPeloNomeComExtensao("digite aqui parte do nome ou nome inteiro do arquivo que busca",
-					diretorio, ".pdf");
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "VOCE NAO SELECIONOU UM DIRETORIO", "DIRETORIO INCORRETO",
-					JOptionPane.ERROR_MESSAGE);
-		}
-
-	}
+//	public static void main(String[] args) {
+//
+//		String diretorio = selecionarDiretorio("Selecionar pasta", "Escolha uma pasta", true);
+//
+//		try {
+//			// lista arquivos gerais
+//			// listarArquivosOuPastas();
+//
+//			// lista arquivos de acordo com a extensao passada
+//			// listaArquivosFiltradosPelaExtensao(diretorio,".pdf");
+//
+//			// lista arquivo de acordo com o trexo do nome descrito e a extensao
+//			listaArquivosFiltradosPeloNomeComExtensao("digite aqui parte do nome ou nome inteiro do arquivo que busca",
+//					diretorio, ".pdf");
+//		} catch (Exception e) {
+//			JOptionPane.showMessageDialog(null, "VOCE NAO SELECIONOU UM DIRETORIO", "DIRETORIO INCORRETO",
+//					JOptionPane.ERROR_MESSAGE);
+//		}
+//
+//	}
 
 	public static File[] listaArquivosFiltradosPelaExtensao(String pDiretorio, final String pExtensaoArquivo) {
 

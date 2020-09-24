@@ -25,28 +25,28 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author Br
  * 
- * necess�rio bibliotecas inclusas no projeto
+ *         necess�rio bibliotecas inclusas no projeto
  * 
  */
 public class LendoXLSX {
 
-	/**
-	 * @param args the command line arguments
-	 */
-	public static void main(String[] args) {
-
-		// leituraLinhasExcel();
-		//leituraColunasExcel("D:\\pasta\\planilha.xlsm");
-
-	}
+//	/**
+//	 * @param args the command line arguments
+//	 */
+//	public static void main(String[] args) {
+//
+//		// leituraLinhasExcel();
+//		//leituraColunasExcel("D:\\pasta\\planilha.xlsm");
+//
+//	}
 
 	public static List<List<String>> leituraColunasExcel(String pDiretorioArquivoElemax) {
-		
-		//variavel que dara o retorno ao metodo
+
+		// variavel que dara o retorno ao metodo
 		List<List<String>> dados = new ArrayList<>();
 		FileInputStream fisPlanilha = null;
 		String diretorioPlanilhaElemax = pDiretorioArquivoElemax;
-		
+
 		try {
 			File file = new File(diretorioPlanilhaElemax);
 			fisPlanilha = new FileInputStream(file);
@@ -54,19 +54,22 @@ public class LendoXLSX {
 			// cria um workbook = planilha toda com todas as abas
 			XSSFWorkbook workbook = new XSSFWorkbook(fisPlanilha);
 
-			// recuperamos apenas a primeira aba ou primeira planilha
-			XSSFSheet sheet = workbook.getSheetAt(1);
+			/**
+			 * getSheetAt - retorna uma planilha de acordo com o index da aba getSheet -
+			 * retorna uma planilha de acordo com o nome na aba
+			 */
+			XSSFSheet sheet = workbook.getSheet("Cadastro de Clientes");
 
 			// retorna todas as linhas da planilha 0 (aba 1)
 			Iterator<Row> rowIterator = sheet.iterator();
 
 			long qtdLinhas = sheet.getLastRowNum();
-			System.out.println("==========================Quantidade de linhas: " + qtdLinhas);
+
+			System.out.println("==== Qtd de linhas preenchidas na planilha Cadastro Clientes Excel: " + qtdLinhas);
 
 			List<String> nomeCliente = new ArrayList<String>();
 			List<String> cpfOuCnpj = new ArrayList<String>();
 			List<String> adm = new ArrayList<String>();
-			List<String> notaFiscal = new ArrayList<String>();
 
 			// varre todas as linhas da planilha 0
 			while (rowIterator.hasNext()) {
@@ -83,50 +86,25 @@ public class LendoXLSX {
 					// criamos uma celula
 					Cell cell = cellIterator.next();
 
+					// percorre as colunas
 					switch (cell.getColumnIndex()) {
-
 					case 1:// Cell.CELL_TYPE_STRING:
-//						System.out.println("coluna 01" + cell.toString());
 						nomeCliente.add(cell.toString());
-
 						break;
 
 					case 2:// Cell.CELL_TYPE_NUMERIC:
-//						System.out.println("coluna 2: " + cell.toString());
 						cpfOuCnpj.add(cell.toString());
 						break;
-
 					case 3:// Cell.CELL_TYPE_FORMULA:
-//						System.out.println("coluna 4: " + cell.toString());
 						adm.add(cell.toString());
-						break;
-
-					case 4:// Cell.CELL_TYPE_FORMULA:
-//						System.out.println("coluna 4: " + cell.toString());
-						notaFiscal.add(cell.toString());
 						break;
 					}
 
 				}
 			}
-			
-			
-			//recebe as listas criadas acima
-			dados = Arrays.asList(nomeCliente, cpfOuCnpj, adm);
 
-//			//percorre colunas
-//			for (int coluna = 0; coluna < dados.size(); coluna++) {
-//				System.out.println("================= COLUNA: " + coluna + " - Nome Coluna: " + dados.get(coluna).get(0));
-//				
-//				//percorre linhas = inicia pelo 1 para pular coluna de cabe�alhos
-//				for (int linha = 1; linha < dados.get(coluna).size(); linha++) {
-//					System.out.println("LINHA " + linha + ": " + dados.get(coluna).get(linha));
-//
-//				}
-//				
-//			}
-			
-			
+			// recebe 3 das 4 listas criadas acima
+			dados = Arrays.asList(nomeCliente, cpfOuCnpj, adm);
 
 		} catch (FileNotFoundException ex) {
 			Logger.getLogger(LendoXLSX.class.getName()).log(Level.SEVERE, null, ex);
@@ -139,9 +117,9 @@ public class LendoXLSX {
 				Logger.getLogger(LendoXLSX.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
-		
+
 		return dados;
-		
+
 	}
 
 	public static void leituraLinhasExcel() {
@@ -155,8 +133,11 @@ public class LendoXLSX {
 			// cria um workbook = planilha toda com todas as abas
 			XSSFWorkbook workbook = new XSSFWorkbook(fisPlanilha);
 
-			// recuperamos apenas a primeira aba ou primeira planilha
-			XSSFSheet sheet = workbook.getSheetAt(0);
+			/**
+			 * getSheetAt - retorna uma planilha de acordo com o index da aba getSheet -
+			 * retorna uma planilha de acordo com o nome na aba
+			 */
+			XSSFSheet sheet = workbook.getSheet("Cadastro de Clientes");
 
 			// retorna todas as linhas da planilha 0 (aba 1)
 			Iterator<Row> rowIterator = sheet.iterator();
